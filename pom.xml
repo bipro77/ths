@@ -11,7 +11,7 @@
     <groupId>com.bipro</groupId>
     <artifactId>ths</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
     <name>ths</name>
     <description>Telemedicine and Healthcare Service (ths)</description>
 
