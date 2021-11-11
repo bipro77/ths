@@ -1,0 +1,137 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <title>Home | MCQS - Multiple Choice Question System</title>
+    <div th:replace="fragments/header.html :: headerCSS"> header CSS</div>
+</head>
+
+<body>
+<!-- Start Left menu area -->
+<div th:replace="fragments/leftMenu.html :: leftMenu"> Left Menu</div>
+<!-- End Left menu area -->
+
+<!-- Start Welcome area -->
+<div class="all-content-wrapper">
+    <div th:replace="fragments/header.html :: header"> header</div>
+
+
+    <div class="data-table-area mg-b-15">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="product-status-wrap">
+                    <div class="sparkline16-list">
+                        <div class="sparkline13-hd">
+                            <div class="main-sparkline13-hd">
+                                <!--                                <h1>-->
+                                <!--                                    MCQ <span class="table-project-n"> </span> List-->
+                                <!--                                    <b> <a th:href="@{/mcq/new}" class="btn btn-primary pull-right"  th:text="${'Add New MCQ'}"-->
+                                <!--                                           style="font-size:15px; color: #ffffff">< </a> </b>-->
+                                <!--                                </h1>-->
+                                <!--/*@thymesVar id="role" type="String"*/-->
+                                <h1 th:text="${'List of Users : ' + role}"></h1>
+                            </div>
+                        </div>
+                        <div class="sparkline13-graph">
+                            <span class="datatable-dashv1-list custom-datatable-overright">
+                                <div id="toolbar">
+                                    <select class="form-control dt-tb">
+                                        <option value="">Export Basic</option>
+                                        <option value="all">Export All</option>
+                                        <option value="selected">Export Selected</option>
+                                    </select>
+                                </div>
+                                <table id="table" data-toggle="table" data-pagination="true" data-search="true"
+                                       data-show-columns="true"
+                                       data-show-pagination-switch="true" data-show-refresh="true"
+                                       data-key-events="true" data-show-toggle="true"
+                                       data-resizable="true" data-cookie="true"
+                                       data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true"
+                                       data-toolbar="#toolbar" >
+                                    <thead>
+                                    <tr>
+
+<!--                                        data-editable="true"-->
+                                        <th data-checkbox="true"></th>
+                                        <th data-field="SerialNo"  >Serial No.</th>
+                                        <th data-field="question" >USERNAME</th>
+                                        <!--      /*@thymesVar id="userList" type="java.util.List<com.bipro.ths.model.User> "*/-->
+                                        <!--      /*@thymesVar id="user" type="com.bipro.ths.model.User"*/-->
+                                        <th data-field="answer" >Full Name</th>
+                                        <th data-field="option1" >Email</th>
+                                        <th data-field="option2" >Phone</th>
+                                        <div th:if="${session.currentUserRole == 'ADMIN'}" th:remove="tag" >
+                                        <th data-field="status" >Status</th>
+                                        <th>Action</th>
+                                        </div>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <!--      /*@thymesVar id="userList" type="java.util.List<com.bipro.ths.model.User> "*/-->
+                                    <!--      /*@thymesVar id="user" type="com.bipro.ths.model.User"*/-->
+                                    <tr th:each=" user, iter : ${userList}">
+                                        <td></td>
+                                        <td th:text="${ iter.index+1 }"></td>
+                                        <td th:text="${ user.getUsername() }"></td>
+                                        <td>
+                                            <b><a title="View Full Profile" th:href="@{'/userProfile/'+${user.getId()}}" style="text-decoration: none;"><span th:text="${ user.getFullName() }" th:remove="tag"></span></a></b>
+                                        </td>
+                                        <td th:text="${ user.getEmail() }"></td>
+                                        <td th:text="${ user.getPhone() }"></td>
+                                        <!--                                        <td th:text="${ user.isAccountEnabled() }"></td>-->
+                                        <!--                                        <td th:text="${ mcq.getStatus() }" > </td>-->
+
+                                    <div th:if="${session.currentUserRole == 'ADMIN'}" th:remove="tag" >
+                                        <div th:if="${ user.isAccountEnabled() == true}" th:remove="tag">      <!--     <td th:text="${ 'Active' }" > </td>-->
+                                            <td>
+<!--                                                <a class="btn btn-white">Active</a>-->
+                                                <!--/*@thymesVar id="role" type="String"*/-->
+                                                <a th:href="@{'/userStatusToggle/'+${role.toLowerCase()}+'/'+${user.getId()}}"
+                                                   class="pd-setting"><i class="fa fa-pencil-square-o"  aria-hidden="true"></i> Enabled </a>
+                                            </td>
+                                        </div>
+                                        <div th:if="${ user.isAccountEnabled() == false }" th:remove="tag">        <!--        <td th:text="${ 'Disable' }" > </td>-->
+                                            <td>
+                                                <!--/*@thymesVar id="role" type="String"*/-->
+                                                <a th:href="@{'/userStatusToggle/'+${role.toLowerCase()}+'/'+${user.getId()}}"
+                                                   class="ds-setting"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Disabled </a>
+                                            </td>
+                                        </div>
+
+                                        <!--  <td> <i class="glyphicon glyphicon-remove" style="font-size:25px;color:red"></i> </td>-->
+
+                                        <td>
+<!--                                            <a th:href="@{'/user/update/'+${user.getId()}}"-->
+                                            <!--                                               data-toggle="tooltip" title="Edit" class="btn btn-success">-->
+                                            <!--                                                <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>-->
+                                            <a th:href="@{'/deleteUser/'+${role.toLowerCase()}+'/'+${user.getId()}}"  onclick="return confirm('DELETE! Are you sure?')"
+                                               data-toggle="tooltip" title="Trash" class="btn btn-danger">
+                                                <i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                        </td>
+                                    </div>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>   <
+
+
+
+    <div th:replace="fragments/footer.html :: footer"> Footer</div>
+</div>
+
+<div th:replace="fragments/footer.html :: scriptMain"> Scripts</div>
+<div th:replace="fragments/footer.html :: scriptDataTable"> Scripts</div>
+</body>
+
+</html>

@@ -1,0 +1,328 @@
+<!doctype html>
+<html class="no-js" lang="en"  xmlns:th="http://www.thymeleaf.org">
+<html class="no-js" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Register | Telemedicine and Healthcare Service </title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- favicon
+		============================================ -->
+<!--    <link rel="shortcut icon" type="image/x-icon" th:href="@{/../img/favicon.ico}">-->
+    <!-- Google Fonts
+		============================================ -->
+    <link href="https://fonts.googleapis.com/css?family=Play:400,700" rel="stylesheet">
+    <!-- Bootstrap CSS
+		============================================ -->
+    <link rel="stylesheet" th:href="@{/../css/bootstrap.min.css}">
+    <!-- Bootstrap CSS
+		============================================ -->
+    <link rel="stylesheet" th:href="@{/../css/font-awesome.min.css}">
+    <!-- owl.carousel CSS
+		============================================ -->
+    <link rel="stylesheet" th:href="@{/../css/owl.carousel.css}">
+    <link rel="stylesheet" th:href="@{/../css/owl.theme.css}">
+    <link rel="stylesheet" th:href="@{/../css/owl.transitions.css}">
+    <!-- animate CSS
+		============================================ -->
+    <link rel="stylesheet" th:href="@{/../css/animate.css}">
+    <!-- normalize CSS
+		============================================ -->
+    <link rel="stylesheet" th:href="@{/../css/normalize.css}">
+    <!-- main CSS
+		============================================ -->
+    <link rel="stylesheet" th:href="@{/../css/main.css}">
+    <!-- morrisjs CSS
+		============================================ -->
+    <link rel="stylesheet" th:href="@{/../css/morrisjs/morris.css}">
+    <!-- mCustomScrollbar CSS
+		============================================ -->
+    <link rel="stylesheet" th:href="@{/../css/scrollbar/jquery.mCustomScrollbar.min.css}">
+    <!-- metisMenu CSS
+		============================================ -->
+    <link rel="stylesheet" th:href="@{/../css/metisMenu/metisMenu.min.css}">
+    <link rel="stylesheet" th:href="@{/../css/metisMenu/metisMenu-vertical.css}">
+    <!-- calendar CSS
+		============================================ -->
+    <link rel="stylesheet" th:href="@{/../css/calendar/fullcalendar.min.css}">
+    <link rel="stylesheet" th:href="@{/../css/calendar/fullcalendar.print.min.css}">
+    <!-- forms CSS
+		============================================ -->
+    <link rel="stylesheet" th:href="@{/../css/form/all-type-forms.css}">
+    <!-- style CSS
+		============================================ -->
+    <link rel="stylesheet" th:href="@{/../css/style.css}">
+    <!-- responsive CSS
+		============================================ -->
+    <link rel="stylesheet" th:href="@{/../css/responsive.css}">
+    <!-- modernizr JS
+		============================================ -->
+    <script th:src="@{/../js/vendor/modernizr-2.8.3.min.js}"></script>
+</head>
+
+<body>
+
+<div class="error-pagewrap">
+    <div class="error-page-int">
+        <div class="text-center custom-login">
+            <h2>Registration</h2>
+            <p> <a th:href="@{/}"> <i> <h4>Telemedicine and Healthcare Service</h4>   Click here to <b>Homepage</b></i> </a></p>
+        </div>
+
+<!--        <div class="alert alert-danger" th:if="${fullName1 != null}" >-->
+            <!--/*@thymesVar id="errorMessage" type=""*/-->
+<!--            <div th:text="${'Worng username'}" th:remove="tag">www</div>-->
+            <!--            <div th:if="${param.error}">-->
+            <!--                    Invalid username and password.-->
+            <!--                    <span th:text="'Hello, ' + ${error}"></span>-->
+            <!--                </div>-->
+<!--        </div>-->
+<!--        <div th:if="${param.logout == false}">-->
+<!--            <div class="alert alert-info" >-->
+<!--                &lt;!&ndash;/*@thymesVar id="message" type=""*/&ndash;&gt;-->
+<!--                <div th:text="${message}" th:remove="tag"></div>-->
+<!--                &lt;!&ndash;                    You have been logged out.&ndash;&gt;-->
+<!--                <br>-->
+<!--                <a th:href="@{/}"> <i> Click here to <b>Homepage</b></i> </a>-->
+<!--            </div>-->
+<!--        </div>-->
+
+        <div class="content-error">
+            <div class="hpanel">
+                <div class="panel-body">
+                    <form th:action="@{/registration}" method="POST"  th:object="${userDto}">
+                        <div class="row">
+                           <div class="form-group col-lg-12">
+                               <label>Full Name</label>
+                               <input class="form-control"  th:name="fullName" th:value="${user.fullName}"  required>
+                               <!--<input class="form-control"  th:name="fullName" th:value="${fullName}"  required>-->
+                              <!-- <div th:text="${fullName1}" th:remove="tag"></div>-->
+                               <!--  <span th:if="${#fields.hasErrors('fullName1')}" th:errors="*{fullName1}">Name Error</span>-->
+                               </div>
+                               <div class="form-group col-lg-9">
+                                    <label>Username</label>
+                                    <input class="form-control" th:name="username" id="username" th:value="${user.username}"  onkeyup="usernameCheck(this);" title="Username: At Least 4 characters" required>
+                               </div>
+                            <div class="form-group col-lg-3">
+                                <label> &nbsp; </label>
+<!--                                <input class="form-control" id="usernameMsg" disabled>-->
+                                <b><i><div id="usernameMsg"></div></i></b>
+                            </div>
+                            <div class="form-group col-lg-12">
+                                <label>Email Address</label>
+                                <!--                                    <input class="form-control" th:name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" required>-->
+                                <input class="form-control" th:name="email" th:value="${user.email}" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" required>
+                            </div>
+                                <div class="form-group col-lg-6">
+                                    <!--<label>Password</label>
+                                    <input type="password" class="form-control" th:name="password" id="password"
+                                           pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
+                                    <div class="form-group mg-b-pass">
+                                        <div class="pwstrength_viewport_progress"></div>
+                                    </div>-->
+                                    <div id="pwd-container1">
+                                        <div class="form-group">
+                                            <label for="password">Password</label>
+                                            <input type="password" class="form-control example1" th:name="password" id="password" onkeyup="check_pass();"
+                                                  required >
+                                            <!--  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" -->
+                                        </div>
+                                        <div class="form-group mg-b-pass">
+                                            <div class="pwstrength_viewport_progress"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-lg-6">
+                                    <label>Repeat Password</label>
+                                    <input type="password" class="form-control" th:name="passwordConfirm" id="passwordConfirm" onkeyup="check_pass();" required>
+
+                                    <!--   pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}"  onkeyup="check_pass();"
+                                          title="Must contain at least one number and one uppercase or lowercase letter, and at least 6 or more characters"  -->
+
+                                      <b><i><div id="passwordConfirmMSG"></div></i></b>
+                                      <input type="checkbox" onclick="passConfirmCheck()"> Show Password
+  <!--                                    <div class="form-group mg-b-pass">-->
+<!--                                      <div class="pwstrength_viewport_progress"></div>-->
+<!--                                        <div id="passwordConfirmMSG"></div>-->
+<!--                                    </div>-->
+                                </div>
+
+<!--                            <div class="sparkline12-graph">-->
+                             <!--   <div id="pwd-container1">
+                                    <div class="form-group">
+                                        <label for="password1">Password</label>
+                                        <input type="password" class="form-control example1" id="password1" placeholder="Password" value="Passwo">
+                                    </div>
+                                    <div class="form-group mg-b-pass">
+                                        <div class="pwstrength_viewport_progress"></div>
+                                    </div>
+                                </div>-->
+<!--                            </div>-->
+
+                               <!-- <div class="form-group col-lg-12">
+                                    <div class="form-group mg-b-pass">
+                                        <div class="pwstrength_viewport_progress"></div>
+                                    </div>
+                                </div>-->
+                             <!--   <div class="form-group col-lg-6">
+                                    <label>Repeat Email Address</label>
+                                    <input class="form-control">
+                                </div>-->
+                            <div class="form-group col-lg-12">
+                                <div class="row">
+                                    <div class="pull-left col-lg-3">
+                                        <label> Register As </label>
+                                    </div>
+<!--                                    <div class="pull-left col-lg-6">-->
+<!--                                        <div style="margin-left:5em">-->
+                                    <lebel style="margin-left:2em"> <input  type="radio" th:value="${'DOCTOR'}" th:name="${'roles'}" th:selected="${role == 'DOCTOR'}"> <b><i>DOCTOR</i></b> </lebel>
+                                    <lebel style="margin-left:2em"> <input  type="radio" th:value="${'PATIENT'}" th:name="${'roles'}" th:selected="${role == 'PATIENT'}"> <b><i>PATIENT</i></b> </lebel>
+<!--                                        </div>-->
+<!--                                    </div>-->
+                                </div>
+                            </div>
+
+<!--                            <div class="checkbox col-lg-12">-->
+<!--                                <input type="checkbox" class="i-checks" checked> Sigh up for our newsletter-->
+
+                        </div>
+                        <br>
+                        <div class="text-center">
+                            <button class="btn btn-success loginbtn"  id="submit" name="submit" type="submit" >CREATE ACCOUNT</button>
+                            <button type="button" class="btn btn-default"  onclick="window.location.href='/login'" >SIGN IN INSTEAD</button>
+                            <button class="btn btn-default" onclick="window.history.back();">BACK</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div th:include="fragments/footer.html :: loginFooter"> Footer </div>
+    </div>
+</div>
+<script th:inline="javascript">
+    function goBackPage() {
+        alert("sdfg");
+        window.history.back();
+        // window.location.href=javascript:history.back();
+        // javascript:history.back();
+    }
+
+    function usernameCheck(username) {
+        var msg = "";
+        if (document.getElementById('username').value == "" ) {
+            document.getElementById("usernameMsg").innerHTML = msg;
+            return;
+        }
+        var usernameList = [[${usernameList}]];
+        if ( usernameList.includes(username.value )){
+            msg = "NOT AVAILABLE" ;
+            // document.getElementById("usernameMsg").innerHTML = msg;
+            document.getElementById('submit').disabled = true;
+            document.getElementById("usernameMsg").style.color = "red";
+        } else{
+            msg = "AVAILABLE" ;
+            // document.getElementById("usernameMsg").innerHTML = msg;
+            document.getElementById('submit').disabled = false;
+            document.getElementById("usernameMsg").style.color = "green";
+        }
+
+        if (username.value.length < 4  ) {
+            msg = "At least 4 characters";
+            document.getElementById('submit').disabled = true;
+            document.getElementById("usernameMsg").style.color = "red";
+        }
+
+        document.getElementById("usernameMsg").innerHTML = msg;
+
+    }
+
+    function check_pass() {
+        var msg="";
+        if (document.getElementById('password').value == "" || document.getElementById('passwordConfirm').value == "" ) {
+            document.getElementById("passwordConfirmMSG").innerHTML = msg;
+            return;
+        }
+        if (document.getElementById('password').value == document.getElementById('passwordConfirm').value) {
+            document.getElementById('submit').disabled = false;
+            msg = "Password Matched";
+            document.getElementById("passwordConfirmMSG").style.color = "green";
+        } else {
+            document.getElementById('submit').disabled = true;
+            msg = "Password Not Matched";
+            document.getElementById("passwordConfirmMSG").style.color = "red";
+        }
+        document.getElementById("passwordConfirmMSG").innerHTML = msg;
+    }
+
+    function passConfirmCheck() {
+        var x = document.getElementById("password");
+        var y = document.getElementById("passwordConfirm");
+        if (x.type === "password") {
+            x.type = "text";
+            y.type = "text";
+        } else {
+            x.type = "password";
+            y.type = "password";
+        }
+    }
+    </script>
+
+<!-- jquery
+    ============================================ -->
+<script th:src="@{/../js/vendor/jquery-1.12.4.min.js}"></script>
+<!-- bootstrap JS
+    ============================================ -->
+<script th:src="@{/../js/bootstrap.min.js}"></script>
+<!-- wow JS
+    ============================================ -->
+<script th:src="@{/../js/wow.min.js}"></script>
+<!-- price-slider JS
+    ============================================ -->
+<script th:src="@{/../js/jquery-price-slider.js}"></script>
+<!-- meanmenu JS
+    ============================================ -->
+<script th:src="@{/../js/jquery.meanmenu.js}"></script>
+<!-- owl.carousel JS
+    ============================================ -->
+<script th:src="@{/../js/owl.carousel.min.js}"></script>
+<!-- sticky JS
+    ============================================ -->
+<script th:src="@{/../js/jquery.sticky.js}"></script>
+<!-- scrollUp JS
+    ============================================ -->
+<script th:src="@{/../js/jquery.scrollUp.min.js}"></script>
+<!-- mCustomScrollbar JS
+    ============================================ -->
+<script th:src="@{/../js/scrollbar/jquery.mCustomScrollbar.concat.min.js}"></script>
+<script th:src="@{/../js/scrollbar/mCustomScrollbar-active.js}"></script>
+<!-- metisMenu JS
+    ============================================ -->
+<script th:src="@{/../js/metisMenu/metisMenu.min.js}"></script>
+<script th:src="@{/../js/metisMenu/metisMenu-active.js}"></script>
+<!-- tab JS
+    ============================================ -->
+<script th:src="@{/../js/tab.js}"></script>
+<!-- icheck JS
+    ============================================ -->
+<script th:src="@{/../js/icheck/icheck.min.js}"></script>
+<script th:src="@{/../js/icheck/icheck-active.js}"></script>
+<!-- plugins JS
+    ============================================ -->
+<script th:src="@{/../js/plugins.js}"></script>
+<!-- main JS
+    ============================================ -->
+<script th:src="@{/../js/main.js}"></script>
+<!-- tawk chat JS
+    ============================================ -->
+<!--<script th:src="@{/../js/tawk-chat.js}"></script>-->
+<!-- pwstrength JS
+       ============================================ -->
+<script th:src="@{/../js/password-meter/pwstrength-bootstrap.min.js}"></script>
+<script th:src="@{/../js/password-meter/zxcvbn.js}"></script>
+<script th:src="@{/../js/password-meter/password-meter-active.js}"></script>
+
+</body>
+
+</html>

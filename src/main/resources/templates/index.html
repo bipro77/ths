@@ -1,0 +1,46 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Home | THS - Telemedicine and Healthcare Service </title>
+    <div th:replace="fragments/header.html :: headerCSS" th:remove="tag"> header CSS </div>
+</head>
+
+<body>
+    <!--[if lt IE 8]>
+		<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+	<![endif]-->
+
+
+    <!-- Start Left menu area -->
+    <div th:replace="fragments/leftMenu.html ::  leftMenu" th:remove="tag">  Left Menu </div>
+    <!-- End Left menu area -->
+    <!-- Start Welcome area -->
+    <div class="all-content-wrapper">
+        <div th:replace="fragments/header.html ::  header" th:remove="tag">   Header </div>
+
+
+      <div style="font-size: 50px; text-align: center ; color: #5c860f"> Telemedicine and Healthcare Service </div>
+        <p style="font-size: 25px; padding: 50px; text-align: justify;  text-justify: inter-word;">Project Description: Nowadays telemedicine is an important aspect of healthcare services.
+            For the increasing need for diagnosis, treatment, and disease prevention of various patients, telemedicine service serves patients remotely.
+            In this project, a website will be build where patients will take medical service from highly qualified doctors. Here, doctors and patients can get service after a successful registration. Both of them can communicate through this website for further analysis of the disease. Patients can choose which doctor will be suitable for them and make an appointment.
+        </p>
+
+
+
+        <div th:replace="fragments/footer.html :: footer" th:remove="tag"> Footer </div>
+    </div> <!--  END of  all-content-wrapper-->
+    <div th:replace="fragments/footer.html :: scriptMain" th:remove="tag"> Scripts  </div>
+    <script th:inline="javascript">
+        // // var usernameList = [[${usernameList}]];
+        // window.onload = function() {
+        //     // Code here
+        //
+        //     var usernameList = window.location.href='/usernames'
+        //     alert(usernameList);
+        // }
+    </script>
+</body>
+
+</html>

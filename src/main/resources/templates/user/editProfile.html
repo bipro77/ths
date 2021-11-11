@@ -1,0 +1,31 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <title>Home | MCQS - Multiple Choice Question System</title>
+    <div th:replace="fragments/header.html :: headerCSS" th:remove="tag"> Header CSS</div>
+</head>
+
+<body>
+<!-- Start Left menu area -->
+<div th:replace="fragments/leftMenu.html :: leftMenu" th:remove="tag"> Left Menu</div>
+<!-- End Left menu area -->
+
+<!-- Start Welcome area -->
+<div class="all-content-wrapper">
+    <div th:replace="fragments/header.html :: header" th:remove="tag"> Header</div>
+
+gg
+
+
+
+    <div th:replace="fragments/footer.html :: footer" th:remove="tag"> Scripts</div>
+</div>
+
+<div th:replace="fragments/footer.html :: scriptMain" th:remove="tag"> Scripts</div>
+<div th:replace="fragments/footer.html :: scriptDataTable" th:remove="tag"> Scripts</div>
+</body>
+
+</html>

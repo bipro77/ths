@@ -1,0 +1,123 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<bean id="conversionService"
+      class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+    <property name="formatters">
+        <set>
+            <bean class="thymeleafexamples.stsm.web.conversion.VarietyFormatter" />
+            <bean class="thymeleafexamples.stsm.web.conversion.DateFormatter" />
+        </set>
+    </property>
+</bean>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <title>Home | MCQS - Multiple Choice Question System</title>
+    <div th:replace="fragments/header.html :: headerCSS"> header CSS</div>
+</head>
+
+<body>
+<!-- Start Left menu area -->
+<div th:replace="fragments/leftMenu.html :: leftMenu"> Left Menu</div>
+<!-- End Left menu area -->
+
+<!-- Start Welcome area -->
+<div class="all-content-wrapper">
+    <div th:replace="fragments/header.html :: header"> header</div>
+
+
+    <div class="data-table-area mg-b-15">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="product-status-wrap">
+                        <div class="sparkline16-list">
+                            <div class="sparkline13-hd">
+                                <div class="main-sparkline13-hd">
+                                    <h1 > Meeting Schedule  </h1>
+
+                                </div>
+                            </div>
+                            <div class="sparkline13-graph">
+                            <span class="datatable-dashv1-list custom-datatable-overright">
+                                <div id="toolbar">
+                                    <select class="form-control dt-tb">
+                                        <option value="">Export Basic</option>
+                                        <option value="all">Export All</option>
+                                        <option value="selected">Export Selected</option>
+                                    </select>
+                                </div>
+                                <table id="table" data-toggle="table" data-pagination="true" data-search="true"
+                                       data-show-columns="true"
+                                       data-show-pagination-switch="true" data-show-refresh="true"
+                                       data-key-events="true" data-show-toggle="true"
+                                       data-resizable="true" data-cookie="true"
+                                       data-cookie-id-table="saveId" data-show-export="true" data-click-to-select="true"
+                                       data-toolbar="#toolbar" >
+                                    <thead>
+                                    <tr>
+
+<!--                                        data-editable="true"-->
+                                        <th data-checkbox="true"></th>
+                                        <th data-field="SerialNo"  >  Serial No.</th>
+<!--                                        <th data-field="Name" > Doctor's Name  </th>-->
+                                        <th data-field="Name" > Event name  </th>
+<!--                                        <th data-field="Location" > Location  </th>-->
+                                        <th data-field="Location" > Date  </th>
+                                        <th data-field="Location" > Time  </th>
+                                        <th data-field="Description" >  Description  </th>
+                                        <th data-field="MeetLink" > Virtual Meeting/ Google Meet Link  </th>
+                                         <th data-field="status"> Action </th>
+
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <!--      /*@thymesVar id="eventsList" type="java.util.*"*/-->
+                                    <!--      /*@thymesVar id="event" type="com.google.api.services.calendar.model;"*/-->
+                                    <tr th:each=" event, iter : ${eventsList}">
+                                        <td></td>
+                                        <td th:text="${ iter.index+1 }"></td>
+
+<!--                                        <td>-->
+<!--                                            <b><a title="View Full Profile" th:href="@{'/userProfile/'+${user.getId()}}" style="text-decoration: none;"><span th:text="${ user.getFullName() }" th:remove="tag"></span></a></b>-->
+<!--                                        </td>-->
+                                        <td th:text="${ event.getSummary() }"></td>
+<!--                                        <td th:text="${ event.getLocation() }"></td>-->
+                                        <!--                                        <td th:text="${ user.isAccountEnabled() }"></td>-->
+                                        <!--                                        <td th:text="${ mcq.getStatus() }" > </td>-->
+
+                                    <td th:text="${ event.getStart().getDateTime().toString().substring(0,10)}"></td>
+                                     <td th:text="${ event.getStart().getDateTime().toString().substring(11,19)}"></td>
+                                    <td th:text="${ event.getDescription() }"></td>
+<!--                                       <td th:text="${ event.getHangoutLink() }"> <a th:href="@{ ${event.getHangoutLink()}}"> </a></td>-->
+                                      <td > <b><a th:href="@{ ${event.getHangoutLink()}}" style="color: deepskyblue;"><span  th:utext="${ event.getHangoutLink()  }" th:remove="tag"></span></a></b>
+                                    </td>
+                                           <td>
+                                       <a th:href="@{'/googleCal/delEvents/'+${event.getId()}}"  onclick="return confirm('DELETE! Are you sure?')"
+                                               data-toggle="tooltip" title="Trash" class="btn btn-danger">
+                                                <i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div th:replace="fragments/footer.html :: footer"> Footer</div>
+</div>
+
+<div th:replace="fragments/footer.html :: scriptMain"> Scripts</div>
+<div th:replace="fragments/footer.html :: scriptDataTable"> Scripts</div>
+</body>
+
+</html>
