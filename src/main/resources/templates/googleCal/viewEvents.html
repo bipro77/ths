@@ -62,10 +62,10 @@
                                         <th data-checkbox="true"></th>
                                         <th data-field="SerialNo"  >  Serial No.</th>
 <!--                                        <th data-field="Name" > Doctor's Name  </th>-->
-                                        <th data-field="Name" > Event name  </th>
+                                        <th data-field="Appointment" > Appointment  </th>
 <!--                                        <th data-field="Location" > Location  </th>-->
-                                        <th data-field="Location" > Date  </th>
-                                        <th data-field="Location" > Time  </th>
+                                        <th data-field="Date" > Date  </th>
+                                        <th data-field="Time" > Time  </th>
                                         <th data-field="Description" >  Description  </th>
                                         <th data-field="MeetLink" > Virtual Meeting/ Google Meet Link  </th>
                                          <th data-field="status"> Action </th>
@@ -87,7 +87,9 @@
                                         <!--                                        <td th:text="${ user.isAccountEnabled() }"></td>-->
                                         <!--                                        <td th:text="${ mcq.getStatus() }" > </td>-->
 
-                                    <td th:text="${ event.getStart().getDateTime().toString().substring(0,10)}"></td>
+                                    <td th:text="${ event.getStart().getDateTime().toString().substring(8,10)+'/'
+                                    + event.getStart().getDateTime().toString().substring(5,7)+'/'
+                                     + event.getStart().getDateTime().toString().substring(0,4)}"></td>
                                      <td th:text="${ event.getStart().getDateTime().toString().substring(11,19)}"></td>
                                     <td th:text="${ event.getDescription() }"></td>
 <!--                                       <td th:text="${ event.getHangoutLink() }"> <a th:href="@{ ${event.getHangoutLink()}}"> </a></td>-->
